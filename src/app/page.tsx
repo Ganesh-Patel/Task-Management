@@ -1,6 +1,17 @@
+// app/page.tsx
+'use client';
+import { useEffect } from "react";
+import { useRouter } from "next/navigation"; // Import from next/navigation
 
-export default function Home() {
-  return (
-    <h1 className="text-2xl text-center ">Task Management App</h1>
-  );
-}
+const RootPage: React.FC = () => {
+    const router = useRouter();
+
+    useEffect(() => {
+        // Redirect to /home when the root route is accessed
+        router.replace('/home');
+    }, [router]);
+
+    return null; // No UI for the root page as it redirects
+};
+
+export default RootPage;
