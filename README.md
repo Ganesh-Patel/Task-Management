@@ -3,7 +3,7 @@
 Welcome to **Task Manager**, your ultimate solution for managing tasks efficiently. With a user-friendly interface and powerful features, Task Manager makes it easy to organize your work and stay on top of your responsibilities.
 
 ## Live Demo
-[Task Manager Live Demo](https://task-management-n5xp8ah04-ganesh-patels-projects.vercel.app/)
+[Task Manager Live Demo](https://task-management-ecru-chi.vercel.app/)
 
 ---
 
