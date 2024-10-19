@@ -7,7 +7,7 @@ Welcome to **Task Manager**, your ultimate solution for managing tasks efficient
 
 ---
 
-## About TaskMate
+## About Task Manager
 
 TaskMate is designed to simplify task management by providing a comprehensive platform for creating, viewing, editing, and deleting tasks. Our mission is to help you boost productivity and maintain clarity in your daily responsibilities.
 
