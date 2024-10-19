@@ -30,6 +30,11 @@ const Navbar = () => {
         logout(); 
         setShowProfileMenu(false); 
     };
+    const toggleModal = () => {
+        console.log('Modal before toggle:', isModalOpen);
+        setIsModalOpen(true);
+        console.log('Modal after toggle:', isModalOpen);
+    };
 
     return (
         <>
@@ -52,7 +57,7 @@ const Navbar = () => {
                                 <FaTasks className="mr-2" /> <span>Tasks</span>
                             </Link>
                             <button 
-                                onClick={() => setIsModalOpen(true)} 
+                                onClick={toggleModal} 
                                 className="flex items-center text-gray-300  hover:text-teal-400"
                             >
                                 <FiPlus className="mr-2" /> <span>New Task</span>
