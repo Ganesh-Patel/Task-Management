@@ -2,8 +2,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/navigation'; // Use Next.js routing
-import Link from 'next/link'; // Import Link from Next.js
+import { useRouter } from 'next/navigation'; 
+import Link from 'next/link'; 
 import Image from 'next/image';
 
 function Signup() {
@@ -15,10 +15,10 @@ function Signup() {
   const [profilefordb, setProfilefordb] = useState<File | null>(null);
   const [profilePic, setProfilePic] = useState<string | ArrayBuffer | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter(); // Use Next.js router
+  const router = useRouter(); 
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]; // Using optional chaining
+    const file = e.target.files?.[0]; 
     if (file) {
       setProfilefordb(file);
       const reader = new FileReader();
@@ -43,15 +43,14 @@ function Signup() {
       formData.append('profilePic', profilefordb);
     }
 
-    console.log('Form Data:', formData);
     try {
+      // API call placeholder for user registration.
       // const response = await registerUser(formData); // Uncomment when API is ready
-      // console.log(response);
-      toast.success('Sign up successful!'); // For now, mock success
-      router.push('/login'); // Use Next.js router for navigation
+      toast.success('Sign up successful!'); 
+      router.push('/login'); 
     } catch (error) {
-      console.error(error);
-      toast.error('Sign up failed!'); // Handle error
+      console.error('Signup error:', error);
+      toast.error('Sign up failed!'); 
     } finally {
       setLoading(false);
     }
@@ -85,6 +84,7 @@ function Signup() {
               id="profilePicInput"
               type="file"
               name="profilePic"
+              accept="image/*"
               onChange={handleImageUpload}
               className="hidden"
             />

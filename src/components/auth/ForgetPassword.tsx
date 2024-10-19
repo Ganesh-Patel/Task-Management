@@ -18,13 +18,13 @@ const ForgetPassword: React.FC = () => {
     // Timer for OTP
     useEffect(() => {
         let timer: NodeJS.Timeout | undefined;
-        if (otpTimer > 0) {
+        if (otpTimer > 0 && otpSent) {
             timer = setInterval(() => {
                 setOtpTimer(prevTime => prevTime - 1);
             }, 1000);
         }
         return () => clearInterval(timer);
-    }, [otpTimer]);
+    }, [otpTimer, otpSent]);
 
     const handleResetPassword = () => {
         if (newPassword !== confirmPassword) {

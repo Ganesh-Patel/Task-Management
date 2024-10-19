@@ -24,7 +24,7 @@ const AboutUs: React.FC = () => {
               At TaskMaster, we believe that productivity should be simple and stress-free. Our task management app is designed to help you prioritize your tasks, collaborate with your team, and achieve your goals effortlessly.
             </p>
             <p className="mt-4 text-lg text-gray-600">
-              Whether you're a student juggling assignments or a professional managing projects, TaskMaster provides the tools you need to stay organized and focused.
+              Whether you&apos;re a student juggling assignments or a professional managing projects, TaskMaster provides the tools you need to stay organized and focused.
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@ const AboutUs: React.FC = () => {
             <div className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-semibold text-teal-600">Flexible Organization</h3>
               <p className="text-gray-600 mt-2">
-                Customize your workflow with tags, lists, and priority settings to suit your personal or team’s needs.
+                Customize your workflow with tags, lists, and priority settings to suit your personal or team&apos;s needs.
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ const AboutUs: React.FC = () => {
                 />
               </div>
               <h3 className="text-xl font-semibold text-teal-600">John Doe</h3>
-              <p className="text-gray-600">Co-Founder & CEO</p>
+              <p className="text-gray-600">Co-Founder &amp; CEO</p>
             </div>
             <div className="text-center">
               <div className="relative w-40 h-40 mx-auto mb-4">
@@ -114,11 +114,11 @@ const AboutUs: React.FC = () => {
           <h2 className="text-3xl font-bold text-teal-600 text-center mb-8">What Our Users Say</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <p className="text-gray-600 italic">"TaskMaster has revolutionized the way I manage my projects. It's intuitive, easy to use, and keeps me organized!"</p>
+              <p className="text-gray-600 italic">&quot;TaskMaster has revolutionized the way I manage my projects. It&apos;s intuitive, easy to use, and keeps me organized!&quot;</p>
               <p className="mt-4 text-teal-600 font-semibold">- Sarah Lee</p>
             </div>
             <div className="p-6 bg-white rounded-lg shadow-md">
-              <p className="text-gray-600 italic">"As a team, we've found TaskMaster invaluable for collaboration. It makes tracking tasks effortless!"</p>
+              <p className="text-gray-600 italic">&quot;As a team, we&apos;ve found TaskMaster invaluable for collaboration. It makes tracking tasks effortless!&quot;</p>
               <p className="mt-4 text-teal-600 font-semibold">- David Kim</p>
             </div>
           </div>

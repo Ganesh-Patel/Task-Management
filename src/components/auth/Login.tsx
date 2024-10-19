@@ -1,20 +1,42 @@
 "use client"; 
 import React, { useState } from 'react';
-// import { useRouter } from 'next/router'; // Import useRouter from Next.js
-import Link from 'next/link'; // Import Link from Next.js
+import Link from 'next/link';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
-  // const router = useRouter(); // Initialize useRouter
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage(null);
 
+    try {
+      // Example API request (Replace with your actual login endpoint)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage({ text: 'Login successful!', type: 'success' });
+        // Navigate to the dashboard or home page if needed
+        // router.push('/dashboard');
+      } else {
+        setMessage({ text: data.message || 'Login failed.', type: 'error' });
+      }
+    } catch (error) {
+      setMessage({ text: 'An error occurred. Please try again.', type: 'error' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
