@@ -5,7 +5,7 @@ Welcome to **TaskMate**, your ultimate solution for managing tasks efficiently. 
 ![TaskMate - Home Page](https://github.com/user-attachments/assets/taskmate_home.png)
 
 ## Live Demo
-[TaskMate Live Demo](https://your-taskmate-demo-link.com)
+[TaskMate Live Demo](https://task-management-n5xp8ah04-ganesh-patels-projects.vercel.app/)
 
 ---
 
@@ -44,30 +44,37 @@ TaskMate is built using the following technologies:
 ## Screenshots
 
 ### 1. Login Page
-![TaskMate - Login Page](https://github.com/user-attachments/assets/taskmate_login.png)
+
+![sslogin](https://github.com/user-attachments/assets/d262a8d0-61a2-4bae-bc3b-47c1c25b53d6)
+
 *Access your account quickly and securely.*
 
 ### 2. Signup Page
-![TaskMate - Signup Page](https://github.com/user-attachments/assets/taskmate_signup.png)
+
+![sssignup](https://github.com/user-attachments/assets/66330ad1-56ac-4a95-ae76-67e3aa2212de)
+
 *Join TaskMate and start managing your tasks today!*
 
 ### 3. Forgot Password Page
-![TaskMate - Forgot Password Page](https://github.com/user-attachments/assets/taskmate_forgot_password.png)
+
+![ssforgpt](https://github.com/user-attachments/assets/90068fb9-ec44-4581-b5e9-422e618f6fcf)
+
 *Recover your password easily with our secure process.*
 
 ### 4. Home
-![TaskMate - Dashboard](https://github.com/user-attachments/assets/taskmate_dashboard.png)
+
+![sshome](https://github.com/user-attachments/assets/c44bd344-9bcb-41a6-9855-aa7701f300bc)
+
+![sshomemobile](https://github.com/user-attachments/assets/15a1b25f-ff1b-49f3-b560-85588ce9e19d)
+
+
 *View all your tasks at a glance and manage them effectively.*
 
-### 5. Create Task
-![TaskMate - Create Task](https://github.com/user-attachments/assets/taskmate_create_task.png)
+### 5. Tasks
+
+![sstasks](https://github.com/user-attachments/assets/6b240ade-6834-4452-90ff-9a144341164a)
+
 *Easily create new tasks with necessary details.*
-
-### 6. Edit Task
-![TaskMate - Edit Task](https://github.com/user-attachments/assets/taskmate_edit_task.png)
-*Update task details quickly and effortlessly.*
-
----
 
 ## Deployment
 
