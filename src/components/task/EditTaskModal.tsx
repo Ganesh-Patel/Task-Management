@@ -26,14 +26,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, currentTask, onClos
 
   useEffect(() => {
     if (open) {
-      setTaskDetails(currentTask); // Set task details when the modal opens
+      setTaskDetails(currentTask); 
     }
   }, [open, currentTask]);
 
   const handleUpdateTask = () => {
     if (taskDetails) {
-      onUpdate(taskDetails); // Call the update function with the current task details
-      onClose(); // Close the modal after updating
+      onUpdate(taskDetails);
+      onClose(); 
     }
   };
 

@@ -5,6 +5,7 @@ import { TextField, Button, Box, MenuItem, Select, FormControl, InputLabel } fro
 
 // Define the shape of the task data
 export interface Task {
+ id: string; 
   name: string;
   description: string;
   priority: string;
@@ -22,11 +23,17 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose }) => {
   const [taskDescription, setTaskDescription] = useState<string>('');
   const [taskPriority, setTaskPriority] = useState<string>('Medium');
   const [taskStatus, setTaskStatus] = useState<string>('Pending');
+  
+
+  const generateUniqueId = (): string => {
+    return 'task-' + Math.random().toString(36).substr(2, 9); // Generates a random string
+};
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const newTask: Task = {
+        id: generateUniqueId(),
       name: taskName,
       description: taskDescription,
       priority: taskPriority,
