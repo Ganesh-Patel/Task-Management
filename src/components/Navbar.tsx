@@ -5,11 +5,14 @@ import { usePathname } from 'next/navigation';
 import { FiHome, FiUser, FiInfo, FiMenu, FiX, FiPlus } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
 import AddNewTask from '@/components/task/AddNewTask';
+import { useUserContext } from '@/app/context/UserContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false); 
     const pathname = usePathname();
+    const { user,isLoggedIn } = useUserContext();
+    console.log(user)
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);

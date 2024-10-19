@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'; 
 import Link from 'next/link'; 
 import Image from 'next/image';
+import { registerUser } from '@/services/authService';
 
 function Signup() {
   const [firstname, setFirstname] = useState<string>('');
@@ -32,7 +33,7 @@ function Signup() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-
+  
     const formData = new FormData();
     formData.append('firstname', firstname);
     formData.append('lastname', lastname);
@@ -42,10 +43,9 @@ function Signup() {
     if (profilefordb) {
       formData.append('profilePic', profilefordb);
     }
-
+  
     try {
-      // API call placeholder for user registration.
-      // const response = await registerUser(formData); // Uncomment when API is ready
+      const response = await registerUser(formData);
       toast.success('Sign up successful!'); 
       router.push('/login'); 
     } catch (error) {
@@ -55,6 +55,7 @@ function Signup() {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20190826/pngtree-abstract-metallic-blue-black-frame-layout-modern-tech-design-template-image_305020.jpg')` }}>

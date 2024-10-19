@@ -2,6 +2,7 @@
 "use client"
 import React, { useCallback, useEffect, useState } from 'react';
 import { Task } from '@/components/task/AddNewTask';
+import EditTaskModal from '@/components/task/EditTaskModal';
 import { Button, Box, Typography, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton, Tabs, Tab, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,6 +13,8 @@ const TaskList: React.FC = () => {
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState('All');
   const [priorityFilter, setPriorityFilter] = useState<string>('');
+  const [openModal, setOpenModal] = useState(false);
+  const [currentTask, setCurrentTask] = useState<Task | null>(null);
 
   useEffect(() => {
     loadTasks();
@@ -53,11 +56,23 @@ const TaskList: React.FC = () => {
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
-  const editTask = (index: number) => {
-    console.log('Edit Task:', tasks[index]);
-    // Implement task editing logic
+  const handleEditClick = (index: number) => {
+    setCurrentTask(tasks[index]);
+    setOpenModal(true);
   };
 
+  const handleModalClose = () => {
+    setOpenModal(false);
+    setCurrentTask(null);
+  };
+
+  const handleUpdateTask = (updatedTask: Task) => {
+    console.log('update task is called  here ')
+    const updatedTasks = tasks.map(task => task.name === updatedTask.name ? updatedTask : task);
+    console.log('updated task is ',updatedTask)
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'High':
@@ -110,43 +125,82 @@ const TaskList: React.FC = () => {
         </FormControl>
       )}
 
-      <List>
-        {filteredTasks.length === 0 ? (
-          <Typography>No tasks available.</Typography>
-        ) : (
-          filteredTasks.map((task, index) => (
-            <ListItem key={index} sx={{ borderBottom: '1px solid #ccc', backgroundColor: task.status === 'Completed' ? getStatusColor(task.status) : 'transparent' }}>
-              <ListItemText
-                primary={task.name}
-                secondary={
-                  <Typography sx={{ color: getPriorityColor(task.priority) }}>
-                    {`Description: ${task.description} | Priority: ${task.priority} | Status: ${task.status}`}
-                  </Typography>
-                }
-              />
-              <ListItemSecondaryAction>
-                {task.status === 'Completed' ? (
-                  <IconButton edge="end" onClick={() => deleteTask(index)}>
-                    <DeleteIcon />
-                  </IconButton>
-                ) : (
-                  <>
-                    <IconButton edge="end" onClick={() => editTask(index)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton edge="end" onClick={() => deleteTask(index)}>
-                      <DeleteIcon />
-                    </IconButton>
-                    <Button onClick={() => toggleStatus(index)}>
-                      {task.status === 'Completed' ? 'Mark as Pending' : 'Mark as Completed'}
-                    </Button>
-                  </>
-                )}
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))
-        )}
-      </List>
+<List>
+  {filteredTasks.length === 0 ? (
+    <Typography>No tasks available.</Typography>
+  ) : (
+    filteredTasks.map((task, index) => (
+      <ListItem
+        key={index}
+        sx={{
+          borderBottom: '1px solid #ccc',
+          backgroundColor: task.status === 'Completed' ? getStatusColor(task.status) : 'transparent',
+          padding: '16px',
+          borderRadius: '8px',
+          marginBottom: '8px',
+          display: 'flex',
+          flexDirection: 'column', // Stack elements vertically
+          alignItems: 'flex-start' // Align items to the start
+        }}
+      >
+        <div className="flex justify-between w-full">
+          <h3 className="text-lg font-medium">{task.name}</h3>
+          <div className="flex gap-1 sm:gap-3">
+            {task.status === 'Completed' ? (
+              <IconButton edge="end" onClick={() => deleteTask(index)}>
+                <DeleteIcon />
+              </IconButton>
+            ) : (
+              <>
+                <IconButton edge="end" onClick={() => handleEditClick(index)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton edge="end" onClick={() => deleteTask(index)}>
+                  <DeleteIcon />
+                </IconButton>
+                <Button onClick={() => toggleStatus(index)}>
+                  {task.status === 'Completed' ? 'Mark as Pending' : 'Mark as Completed'}
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Status Indicator as Typography */}
+        <Typography
+          variant="body2"
+          sx={{
+            backgroundColor: getStatusColor(task.status),
+            color: 'white',
+            padding: '4px 8px',
+            borderRadius: '12px',
+            display: 'inline-block',
+            marginTop: '8px'
+          }}
+        >
+          {task.status}
+        </Typography>
+
+        <Typography sx={{ color: getPriorityColor(task.priority) }} className="mt-1">
+          {`Description: ${task.description} | Priority: ${task.priority}`}
+        </Typography>
+
+        <Typography className="mt-1 text-sm text-slate-600">
+          {`Status: ${task.status}`}
+        </Typography>
+      </ListItem>
+    ))
+  )}
+</List>
+
+
+       {/* Include the EditTaskModal here */}
+       <EditTaskModal
+        open={openModal}
+        currentTask={currentTask}
+        onClose={handleModalClose}
+        onUpdate={handleUpdateTask}
+      />
     </Box>
   );
 };

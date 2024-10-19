@@ -1,12 +1,18 @@
 "use client"; 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { loginUser } from '@/services/authService.js'; // Import the login API function
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useUserContext } from '@/app/context/UserContext';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const { login } = useUserContext();
+  const router =useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -14,30 +20,36 @@ const Login: React.FC = () => {
     setMessage(null);
 
     try {
-      // Example API request (Replace with your actual login endpoint)
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+        const response = await loginUser({ email, password });
 
-      const data = await response.json();
+        if (response.status === 200) {
+            const userData = response.data; // Assuming response.data contains the user information
 
-      if (response.ok) {
-        setMessage({ text: 'Login successful!', type: 'success' });
-        // Navigate to the dashboard or home page if needed
-        // router.push('/dashboard');
-      } else {
-        setMessage({ text: data.message || 'Login failed.', type: 'error' });
-      }
-    } catch (error) {
-      setMessage({ text: 'An error occurred. Please try again.', type: 'error' });
+            // Use the login method from context
+            login({
+                email: userData.email,
+                firstName: userData.firstname,
+                lastName: userData.lastname,
+                profilePic: userData.profilePic,
+                role: userData.role,
+            });
+
+            setMessage({ text: 'Login successful!', type: 'success' });
+            router.push('/home');
+        } else {
+            setMessage({ text: 'Login failed.', type: 'error' });
+        }
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            setMessage({ text: error.response?.data?.message || 'An error occurred during login.', type: 'error' });
+        } else {
+            setMessage({ text: 'An unexpected error occurred.', type: 'error' });
+        }
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(https://png.pngtree.com/thumb_back/fh260/background/20190826/pngtree-abstract-metallic-blue-black-frame-layout-modern-tech-design-template-image_305020.jpg)' }}>

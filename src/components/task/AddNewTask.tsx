@@ -39,11 +39,8 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose }) => {
   };
 
   const saveTask = (task: Task) => {
-    // Retrieve existing tasks from local storage
     const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    // Add the new task to the existing tasks
     tasks.push(task);
-    // Save the updated tasks array back to local storage
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
