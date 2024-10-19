@@ -74,6 +74,31 @@ TaskMate is built using the following technologies:
 
 *Easily create new tasks with necessary details.*
 
+## Setup Instructions
+
+To run the Task Manager application locally, follow these steps:
+
+### Prerequisites
+
+- Node.js (v14 or later)
+- npm or yarn
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/task-manager.git
+cd task-manager
+### Install Dependencies
+```bash
+npm install
+# or
+yarn install
+
+### Run
+```bash
+npm run dev
+
+
 ## Deployment
 
 - **Frontend Deployment**: The frontend is deployed on **Vercel**, allowing for quick access to the application with excellent performance.
