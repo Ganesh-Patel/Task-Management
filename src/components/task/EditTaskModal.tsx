@@ -12,7 +12,7 @@ import {
   MenuItem,
   Box,
 } from '@mui/material';
-import { Task } from './AddNewTask'; // Adjust import based on your structure
+import { Task } from './AddNewTask'; 
 
 interface EditTaskModalProps {
   open: boolean;

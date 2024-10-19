@@ -16,9 +16,10 @@ export interface Task {
 interface TaskModalProps {
   open: boolean;
   handleClose: () => void;
+  addNewTask: (task: { id: string; name: string; description: string; priority: string; status: string }) => void;
 }
 
-const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose }) => {
+const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose,addNewTask }) => {
   const [taskName, setTaskName] = useState<string>('');
   const [taskDescription, setTaskDescription] = useState<string>('');
   const [taskPriority, setTaskPriority] = useState<string>('Medium');
@@ -26,7 +27,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose }) => {
   
 
   const generateUniqueId = (): string => {
-    return 'task-' + Math.random().toString(36).substr(2, 9); // Generates a random string
+    return 'task-' + Math.random().toString(36).substr(2, 9); 
 };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -40,17 +41,10 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, handleClose }) => {
       status: taskStatus,
     };
 
-    saveTask(newTask);
+    addNewTask(newTask);
     resetForm();
     handleClose();
   };
-
-  const saveTask = (task: Task) => {
-    const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  };
-
   const resetForm = () => {
     setTaskName('');
     setTaskDescription('');

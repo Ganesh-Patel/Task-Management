@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { SelectChangeEvent } from '@mui/material/Select';
 import EditTaskModal from '@/components/task/EditTaskModal';
 import { useUserContext } from '@/app/context/UserContext';
+import TaskModal from './AddNewTask';
 
 interface Task {
     id: string;
@@ -38,6 +39,7 @@ const TaskList: React.FC = () => {
     const [priorityFilter, setPriorityFilter] = useState<string>('');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [openModal, setOpenModal] = useState(false);
+    const [openAddModal, setOpenAddModal] = useState(false);
     const [currentTask, setCurrentTask] = useState<Task | null>(null);
     const { isLoggedIn } = useUserContext();
     const [loading, setLoading] = useState(true);
@@ -69,6 +71,13 @@ const TaskList: React.FC = () => {
         if (storedTasks) {
             setTasks(JSON.parse(storedTasks));
         }
+    };
+    const addNewTask = (newTask: Task) => {
+        const updatedTasks = [...tasks, newTask];
+        setTasks(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+        loadTasks();
+        setOpenAddModal(false);
     };
 
     const filterTasks = useCallback(() => {
@@ -136,7 +145,12 @@ const TaskList: React.FC = () => {
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(event.target.value);
     };
-
+    const handleAddTaskClick = () => {
+        setOpenAddModal(true);
+    };
+    const handleAddModalClose = () => {
+        setOpenAddModal(false);
+    };
     const getPriorityColor = (priority: string) => {
         switch (priority) {
             case 'High':
@@ -168,18 +182,27 @@ const TaskList: React.FC = () => {
                 <Typography variant="h6" gutterBottom>
                     Please log in to view your tasks.
                 </Typography>
-                <Button variant="contained" color="primary" onClick={() => router.push('/login')}>
+                <Button
+                    variant="contained"
+                    onClick={() => router.push('/login')}
+                    sx={{ backgroundColor: 'teal', '&:hover': { backgroundColor: 'darkcyan' } }} // Add hover effect if desired
+                >
                     Login
                 </Button>
             </Box>
         );
     }
- 
+
     return (
         <Box sx={{ p: 4, minHeight: '80vh' }}>
-            <Typography variant="h4" gutterBottom>
-                Task List
-            </Typography>
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+                <Typography variant="h4" gutterBottom>
+                    Task List
+                </Typography>
+                <Button variant="contained"  sx={{ backgroundColor: 'teal', '&:hover': { backgroundColor: 'darkcyan' } }}  onClick={handleAddTaskClick}>
+                    Add New Task
+                </Button>
+            </Box>
 
             <TextField
                 label="Search Tasks"
@@ -272,6 +295,7 @@ const TaskList: React.FC = () => {
             </List>
 
             <EditTaskModal open={openModal} currentTask={currentTask} onClose={handleModalClose} onUpdate={handleUpdateTask} />
+            <TaskModal open={openAddModal} handleClose={handleAddModalClose} addNewTask={addNewTask} />
         </Box>
     );
 };

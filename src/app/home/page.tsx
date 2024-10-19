@@ -1,10 +1,10 @@
 "use client"; 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import AddNewTask from '@/components/task/AddNewTask'; 
+import { useRouter } from 'next/navigation';
 
 const Home: React.FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+const router=useRouter();
 
     return (
         <div
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
                     <p className="text-gray-600 mb-8">Organize your tasks efficiently and boost your productivity.</p>
                     <div className="space-x-4">
                         <button
-                            onClick={() => setIsModalOpen(true)} // Open modal on button click
+                            onClick={() => {router.push('/tasks')}} // Open modal on button click
                             className="bg-teal-500 text-white py-2 px-4 rounded hover:bg-teal-600 transition duration-200"
                         >
                             Create Task
@@ -34,11 +34,6 @@ const Home: React.FC = () => {
                 </div>
             </div>
 
-            {/* Task Modal */}
-            <AddNewTask
-                open={isModalOpen}
-                handleClose={() => setIsModalOpen(false)}
-            />
         </div>
     );
 };

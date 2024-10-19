@@ -4,13 +4,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation'; 
 import { FiHome, FiUser, FiInfo, FiMenu, FiX, FiPlus, FiLogOut } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
-import AddNewTask from '@/components/task/AddNewTask';
 import Image from 'next/image'; 
 import { useUserContext } from '@/app/context/UserContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [showProfileMenu, setShowProfileMenu] = useState(false);
     const pathname = usePathname();
     const { user, isLoggedIn, logout } = useUserContext(); 
@@ -29,11 +27,6 @@ const Navbar = () => {
     const handleLogout = () => {
         logout(); 
         setShowProfileMenu(false); 
-    };
-    const toggleModal = () => {
-        console.log('Modal before toggle:', isModalOpen);
-        setIsModalOpen(true);
-        console.log('Modal after toggle:', isModalOpen);
     };
 
     return (
@@ -56,12 +49,7 @@ const Navbar = () => {
                             <Link href="/tasks" className={`${linkClasses('/tasks')}text-sm hover:text-teal-400 text-gray-300 font-medium flex items-center`}>
                                 <FaTasks className="mr-2" /> <span>Tasks</span>
                             </Link>
-                            <button 
-                                onClick={toggleModal} 
-                                className="flex items-center text-gray-300  hover:text-teal-400"
-                            >
-                                <FiPlus className="mr-2" /> <span>New Task</span>
-                            </button>
+                
                             <Link href="/about" className={`${linkClasses('/')}text-sm text-gray-300 hover:text-teal-400 font-medium flex items-center`}>
                                 <FiInfo className="mr-2" /> <span>About Us</span>
                             </Link>
@@ -79,7 +67,7 @@ const Navbar = () => {
                                         />
                                     </button>
                                     {showProfileMenu && (
-                                        <div className="absolute right-0 mt-4 w-48 bg-black border rounded shadow-lg">
+                                        <div className="absolute right-0 mt-4 w-48 bg-black border rounded shadow-lg z-50">
                                             <Link href="/about" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
                                                 <FiInfo className="inline mr-2" /> <span>About Us</span>
                                             </Link>
@@ -129,12 +117,6 @@ const Navbar = () => {
                             <Link href="/tasks" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
                                 <FaTasks className="inline mr-2" /> <span>Tasks</span>
                             </Link>
-                            <button 
-                                onClick={() => setIsModalOpen(true)} 
-                                className="block px-3 py-2 text-gray-300 hover:text-teal-400"
-                            >
-                                <FiPlus className="inline mr-2" /> <span>New Task</span>
-                            </button>
                             <Link href="/about" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
                                 <FiInfo className="inline mr-2" /> <span>About Us</span>
                             </Link>
@@ -154,12 +136,6 @@ const Navbar = () => {
                     </div>
                 )}
             </nav>
-
-            {/* Task Modal */}
-            <AddNewTask
-                open={isModalOpen}
-                handleClose={() => setIsModalOpen(false)}
-            />
         </>
     );
 };
