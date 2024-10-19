@@ -1,6 +1,7 @@
 import React from 'react';
+import Image from 'next/image';
 
-const AboutUs: React.FC = ()  => {
+const AboutUs: React.FC = () => {
   return (
     <div className="bg-gray-50 text-gray-800 py-16">
       <div className="container mx-auto px-6 md:px-12 lg:px-24">
@@ -8,11 +9,14 @@ const AboutUs: React.FC = ()  => {
 
         <div className="flex flex-col lg:flex-row items-center mb-12">
           <div className="lg:w-1/2 mb-8 lg:mb-0">
-            <img
-              src="https://www.shutterstock.com/image-vector/business-planning-task-management-concept-260nw-1987578881.jpg"  // Replace with a relevant image
-              alt="Task Management"
-              className="rounded-lg shadow-lg w-full object-cover"
-            />
+            <div className="relative w-full h-64 lg:h-96">
+              <Image
+                src="https://www.shutterstock.com/image-vector/business-planning-task-management-concept-260nw-1987578881.jpg"
+                alt="Task Management"
+                layout="fill"
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
           </div>
           <div className="lg:w-1/2 lg:pl-12">
             <h2 className="text-2xl font-semibold text-teal-600 mb-4">Welcome to TaskMaster</h2>
@@ -32,7 +36,6 @@ const AboutUs: React.FC = ()  => {
               Our mission is to empower individuals and teams to manage their tasks more effectively. We aim to create a platform that inspires productivity and fosters collaboration.
             </p>
           </div>
-
           <div className="p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <h3 className="text-2xl font-bold text-teal-600 mb-4">Our Vision</h3>
             <p className="text-gray-600">
@@ -69,29 +72,38 @@ const AboutUs: React.FC = ()  => {
           <h2 className="text-3xl font-bold text-teal-600 text-center mb-8">Meet the Team</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <img
-                src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg" // Replace with team member images
-                alt="Team Member 1"
-                className="rounded-full w-40 h-40 mx-auto mb-4 object-cover"
-              />
+              <div className="relative w-40 h-40 mx-auto mb-4">
+                <Image
+                  src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg"
+                  alt="Team Member 1"
+                  layout="fill"
+                  className="rounded-full object-cover"
+                />
+              </div>
               <h3 className="text-xl font-semibold text-teal-600">John Doe</h3>
               <p className="text-gray-600">Co-Founder & CEO</p>
             </div>
             <div className="text-center">
-              <img
-                src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg"
-                alt="Team Member 2"
-                className="rounded-full w-40 h-40 mx-auto mb-4 object-cover"
-              />
+              <div className="relative w-40 h-40 mx-auto mb-4">
+                <Image
+                  src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg"
+                  alt="Team Member 2"
+                  layout="fill"
+                  className="rounded-full object-cover"
+                />
+              </div>
               <h3 className="text-xl font-semibold text-teal-600">Jane Smith</h3>
               <p className="text-gray-600">Chief Technology Officer</p>
             </div>
             <div className="text-center">
-              <img
-                src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg"
-                alt="Team Member 3"
-                className="rounded-full w-40 h-40 mx-auto mb-4 object-cover"
-              />
+              <div className="relative w-40 h-40 mx-auto mb-4">
+                <Image
+                  src="https://i.pinimg.com/280x280_RS/79/dd/11/79dd11a9452a92a1accceec38a45e16a.jpg"
+                  alt="Team Member 3"
+                  layout="fill"
+                  className="rounded-full object-cover"
+                />
+              </div>
               <h3 className="text-xl font-semibold text-teal-600">Alex Brown</h3>
               <p className="text-gray-600">Product Manager</p>
             </div>

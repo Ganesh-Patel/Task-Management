@@ -1,10 +1,10 @@
-"use client"; 
+"use client";
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation'; // Use Next.js routing
 import Link from 'next/link'; // Import Link from Next.js
-// import { registerUser } from '../../utils/userApis'; // Uncomment when API is ready
+import Image from 'next/image';
 
 function Signup() {
   const [firstname, setFirstname] = useState<string>('');
@@ -43,7 +43,7 @@ function Signup() {
       formData.append('profilePic', profilefordb);
     }
 
-    console.log('Form Data:', formData); 
+    console.log('Form Data:', formData);
     try {
       // const response = await registerUser(formData); // Uncomment when API is ready
       // console.log(response);
@@ -69,7 +69,14 @@ function Signup() {
               onClick={() => document.getElementById('profilePicInput')?.click()}
             >
               {profilePic ? (
-                <img src={profilePic as string} alt="Profile" className="w-full h-full rounded-full object-cover" />
+                <div className="relative w-full h-full rounded-full overflow-hidden">
+                  <Image
+                    src={profilePic as string}
+                    alt="Profile"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
               ) : (
                 <span className="text-gray-500">Upload</span>
               )}

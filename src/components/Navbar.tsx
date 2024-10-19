@@ -23,11 +23,6 @@ const Navbar = () => {
                     {/* Logo */}
                     <div className="flex items-center">
                         <Link href="/home" className="flex-shrink-0">
-                            {/* <img
-                                className="h-8 w-auto"
-                                src="/" // Adjust the path to your logo
-                                alt="Task Manager Logo"
-                            /> */}
                               <h1 className='text-2xl py-1 font-bold text-teal-400'>Task Manager</h1>
                         </Link>
                     </div>
