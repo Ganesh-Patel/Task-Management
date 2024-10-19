@@ -2,8 +2,6 @@
 
 Welcome to **TaskMate**, your ultimate solution for managing tasks efficiently. With a user-friendly interface and powerful features, TaskMate makes it easy to organize your work and stay on top of your responsibilities.
 
-![TaskMate - Home Page](https://github.com/user-attachments/assets/taskmate_home.png)
-
 ## Live Demo
 [TaskMate Live Demo](https://task-management-n5xp8ah04-ganesh-patels-projects.vercel.app/)
 
