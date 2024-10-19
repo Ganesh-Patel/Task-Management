@@ -1,9 +1,9 @@
-# TaskMate - Task Management App
+# Task Manager - Task Management App
 
-Welcome to **TaskMate**, your ultimate solution for managing tasks efficiently. With a user-friendly interface and powerful features, TaskMate makes it easy to organize your work and stay on top of your responsibilities.
+Welcome to **Task Manager**, your ultimate solution for managing tasks efficiently. With a user-friendly interface and powerful features, Task Manager makes it easy to organize your work and stay on top of your responsibilities.
 
 ## Live Demo
-[TaskMate Live Demo](https://task-management-n5xp8ah04-ganesh-patels-projects.vercel.app/)
+[Task Manager Live Demo](https://task-management-n5xp8ah04-ganesh-patels-projects.vercel.app/)
 
 ---
 
