@@ -88,16 +88,18 @@ To run the Task Manager application locally, follow these steps:
 ```bash
 git clone https://github.com/your-username/task-manager.git
 cd task-manager
+```
 ### Install Dependencies
 ```bash
 npm install
 # or
 yarn install
+```
 
 ### Run
 ```bash
 npm run dev
-
+```
 
 ## Deployment
 
