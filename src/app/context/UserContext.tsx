@@ -1,6 +1,7 @@
 // context/UserContext.tsx
 "use client"; 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import {logoutUser,isUserLoggedIn} from '@/services/authService.js'
 
 interface User {
     email: string;
@@ -26,13 +27,42 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const [loading, setLoading] = useState(true); 
 
+
+  useEffect(() => {
+    console.log('checking loin from conext')
+    checkLoginStatus();
+
+  }, []);
+  
+  const checkLoginStatus = async () => {
+    try {
+        const response = await isUserLoggedIn();
+        if (response && response.status === 200) {
+            console.log(response);
+            setUser(response.data.user); 
+            setIsLoggedIn(true);          
+        } else {
+            setUser(null);                
+            setIsLoggedIn(false);
+        }
+    } catch (error) {
+        console.error('Failed to check login status:', error);
+        setUser(null);
+        setIsLoggedIn(false);
+    } finally {
+
+        setLoading(false);
+    }
+};
+
   const login = (userData: User) => {
     setUser(userData);     
     setIsLoggedIn(true);    
     setLoading(false); 
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const res=await logoutUser();
     setUser(null);           
     setIsLoggedIn(false);   
   };

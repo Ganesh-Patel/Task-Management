@@ -2,24 +2,34 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; 
-import { FiHome, FiUser, FiInfo, FiMenu, FiX, FiPlus } from 'react-icons/fi';
+import { FiHome, FiUser, FiInfo, FiMenu, FiX, FiPlus, FiLogOut } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
 import AddNewTask from '@/components/task/AddNewTask';
+import Image from 'next/image'; 
 import { useUserContext } from '@/app/context/UserContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [showProfileMenu, setShowProfileMenu] = useState(false);
     const pathname = usePathname();
-    const { user,isLoggedIn } = useUserContext();
-    console.log(user)
+    const { user, isLoggedIn, logout } = useUserContext(); 
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
+    const toggleProfileMenu = () => {
+        setShowProfileMenu(!showProfileMenu);
+    };
+
     const linkClasses = (path: string) =>
         pathname === path ? 'text-teal-400' : 'text-gray-300 hover:text-teal-400';
+
+    const handleLogout = () => {
+        logout(); 
+        setShowProfileMenu(false); 
+    };
 
     return (
         <>
@@ -35,24 +45,53 @@ const Navbar = () => {
 
                         {/* Desktop Navigation */}
                         <div className="hidden md:flex space-x-8 items-center">
-                            <Link href="/" className={`${linkClasses('/')} text-sm font-medium flex items-center`}>
-                                <FiHome className="mr-2" /> Home
+                            <Link href="/" className={`${linkClasses('/')}text-sm font-medium text-gray-300 hover:text-teal-400 flex items-center`}>
+                                <FiHome className="mr-2" />Home
                             </Link>
-                            <Link href="/tasks" className={`${linkClasses('/tasks')} text-sm font-medium flex items-center`}>
-                                <FaTasks className="mr-2" /> Tasks
+                            <Link href="/tasks" className={`${linkClasses('/tasks')}text-sm hover:text-teal-400 text-gray-300 font-medium flex items-center`}>
+                                <FaTasks className="mr-2" /> <span>Tasks</span>
                             </Link>
                             <button 
-                                onClick={() => setIsModalOpen(true)} // Open modal on button click
-                                className="flex items-center text-sm font-medium text-gray-300 hover:text-teal-400"
+                                onClick={() => setIsModalOpen(true)} 
+                                className="flex items-center text-gray-300  hover:text-teal-400"
                             >
-                                <FiPlus className="mr-2" /> New Task
+                                <FiPlus className="mr-2" /> <span>New Task</span>
                             </button>
-                            <Link href="/about" className={`${linkClasses('/about')} text-sm font-medium flex items-center`}>
-                                <FiInfo className="mr-2" /> About Us
+                            <Link href="/about" className={`${linkClasses('/')}text-sm text-gray-300 hover:text-teal-400 font-medium flex items-center`}>
+                                <FiInfo className="mr-2" /> <span>About Us</span>
                             </Link>
-                            <Link href="/login" className="text-sm font-medium text-gray-300 hover:text-teal-400 flex items-center">
-                                <FiUser className="mr-2" /> Login
-                            </Link>
+
+                            {/* Profile Menu or Login */}
+                            {isLoggedIn  && user ? (
+                                <div className="relative">
+                                    <button onClick={toggleProfileMenu} className="flex items-center text-gray-300 hover:text-teal-400 focus:outline-none">
+                                        <Image
+                                            src={user.profilePic || '/default-profile.png'}
+                                            alt="User profile"
+                                            className="w-8 h-8 rounded-full"
+                                            width={32}
+                                            height={32}
+                                        />
+                                    </button>
+                                    {showProfileMenu && (
+                                        <div className="absolute right-0 mt-4 w-48 bg-black border rounded shadow-lg">
+                                            <Link href="/about" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
+                                                <FiInfo className="inline mr-2" /> <span>About Us</span>
+                                            </Link>
+                                            <button
+                                                onClick={handleLogout}
+                                                className="w-full text-left block px-3 py-2 text-gray-300 hover:text-teal-400"
+                                            >
+                                                <FiLogOut className="inline mr-2" /> <span>Logout</span>
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <Link href="/login" className="flex items-center text-gray-300 hover:text-teal-400">
+                                    <FiUser className="mr-2" /> <span>Login</span>
+                                </Link>
+                            )}
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -77,26 +116,35 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 {isOpen && (
-                    <div className="md:hidden bg-black" id="mobile-menu">
+                    <div onClick={toggleMenu}  className="md:hidden bg-black" id="mobile-menu">
                         <div className="px-2 pt-2 pb-3 space-y-1">
-                            <Link href="/" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-teal-400">
-                                <FiHome className="inline mr-2" /> Home
+                            <Link href="/" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
+                                <FiHome className="inline mr-2" /> <span>Home</span>
                             </Link>
-                            <Link href="/tasks" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-teal-400">
-                                <FaTasks className="inline mr-2" /> Tasks
+                            <Link href="/tasks" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
+                                <FaTasks className="inline mr-2" /> <span>Tasks</span>
                             </Link>
                             <button 
-                                onClick={() => setIsModalOpen(true)} // Open modal on button click
-                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-teal-400"
+                                onClick={() => setIsModalOpen(true)} 
+                                className="block px-3 py-2 text-gray-300 hover:text-teal-400"
                             >
-                                <FiPlus className="inline mr-2" /> New Task
+                                <FiPlus className="inline mr-2" /> <span>New Task</span>
                             </button>
-                            <Link href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-teal-400">
-                                <FiInfo className="inline mr-2" /> About Us
+                            <Link href="/about" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
+                                <FiInfo className="inline mr-2" /> <span>About Us</span>
                             </Link>
-                            <Link href="/login" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-teal-400">
-                                <FiUser className="inline mr-2" /> Login
-                            </Link>
+                            {isLoggedIn ? (
+                                <button
+                                    onClick={handleLogout}
+                                    className="block px-3 py-2 text-gray-300 hover:text-teal-400"
+                                >
+                                    <FiLogOut className="inline mr-2" /> <span>Logout</span>
+                                </button>
+                            ) : (
+                                <Link href="/login" className="block px-3 py-2 text-gray-300 hover:text-teal-400">
+                                    <FiUser className="inline mr-2" /> <span>Login</span>
+                                </Link>
+                            )}
                         </div>
                     </div>
                 )}

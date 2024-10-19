@@ -29,13 +29,12 @@ export const loginUser = async (user) => {
   }
 };
 
-export const logoutUser= async (setIsLoggedIn) => {
+export const logoutUser= async () => {
   try {
     const response = await axios.post(`${API_URL}user/logoutuser`,{},{
       withCredentials: true,
     });
     console.log(`logged out successfully:`, { response: response.data });
-    setIsLoggedIn(false);
     return response.data;
   } catch (error) {
     console.error(`Error in logging out:`, { error: error.message });
@@ -83,7 +82,7 @@ export const changePassword= async (email,newPassword,confirmPassword) => {
   }
 }
 
-export const isUserLoggedIn= async (setIsLoggedIn,setUser) => {
+export const isUserLoggedIn= async () => {
   try {
     const response = await axios.get(
       `${API_URL}user/loggedIn`,
@@ -93,11 +92,9 @@ export const isUserLoggedIn= async (setIsLoggedIn,setUser) => {
     );
     console.log('response from api check',response)
     console.log(response.data.user)
-    if (response.status === 200) { 
-      setIsLoggedIn(true);
-      setUser(response.data.user);
-    } else {
-      setIsLoggedIn(false);
+    if (response) { 
+        return response;
+      
     }
   } catch (err) {
     console.log("Error checking login status: " + err.message);
