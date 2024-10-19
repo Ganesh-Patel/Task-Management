@@ -1,7 +1,7 @@
 "use client"; 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { loginUser } from '@/services/authService.js'; // Import the login API function
+import { loginUser } from '@/services/authService.js'; 
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useUserContext } from '@/app/context/UserContext';
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
         const response = await loginUser({ email, password });
 
         if (response.status === 200) {
-            const userData = response.data; // Assuming response.data contains the user information
+            const userData = response.data; 
 
             // Use the login method from context
             login({
