@@ -82,7 +82,7 @@ TaskMate is built using the following technologies:
 
 ## Author
 
-**Your Name**  
+**Ganesh Patel**  
 [GitHub Profile](https://github.com/Ganesh-Patel)
 
 ---
