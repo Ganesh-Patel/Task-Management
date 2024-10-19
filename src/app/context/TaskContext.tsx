@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type Task = {
+    id: string,
     name: string;
     description: string;
     priority: string;

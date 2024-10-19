@@ -81,6 +81,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({ open, currentTask, onClos
                 inputProps={{ 'aria-label': 'Task Status' }} // Accessibility
               >
                 <MenuItem value="Pending">Pending</MenuItem>
+                <MenuItem value="InProgress">In Progress</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
               </Select>
             </FormControl>
